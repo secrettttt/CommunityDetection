@@ -89,8 +89,8 @@ def showCluster(dataSet, k, centroids, clusterAssment):
         markIndex = int(clusterAssment[i, 0])
         b.append(markIndex)
     a = []
-    for i in range(1000):
-        a.append(i)
+    for i in range(len(dataSet)):
+        a.append(i+1)#dataSet中的节点的序号是从1开始的
  
     #字典中的key值即为csv中列名
     dataframe = pd.DataFrame({'row':a,'type':b})

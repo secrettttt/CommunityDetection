@@ -19,8 +19,8 @@ fileIn = open("network_mix1_point.csv")  #是正斜杠
 for line in fileIn.readlines(): 
 	temp=[]
 	lineArr = line.strip().split(',')  #line.strip()把末尾的'\n'去掉
-	temp.append(float(lineArr[0]))
 	temp.append(float(lineArr[1]))
+	temp.append(float(lineArr[2]))
 	dataSet.append(temp)
     #dataSet.append([float(lineArr[0]), float(lineArr[1])])  
 fileIn.close()  
