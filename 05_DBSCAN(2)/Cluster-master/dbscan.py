@@ -19,9 +19,9 @@ def load_data():
     for line in fileIn.readlines(): 
         temp=[]
         lineArr = line.strip().split(',')  #line.strip()把末尾的'\n'去掉
-        temp.append(float(lineArr[0]))
         temp.append(float(lineArr[1]))
         temp.append(float(lineArr[2]))
+        temp.append(float(lineArr[0]))
         points.append(temp)
         #dataSet.append([float(lineArr[0]), float(lineArr[1])])  
     fileIn.close()
@@ -142,7 +142,7 @@ if __name__ == '__main__':
         b.append(markIndex)
     a = []
     for i in range(1000):
-        a.append(i)
+        a.append(i+1)
  
     #字典中的key值即为csv中列名
     dataframe = pd.DataFrame({'row':a,'type':b})
