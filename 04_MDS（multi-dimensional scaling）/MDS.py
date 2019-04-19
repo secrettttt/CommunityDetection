@@ -8,6 +8,8 @@ import csv
 import numpy as np
 from sklearn.manifold import MDS
 
+MAXNUM=99999
+
 #输入：边集.csv(要求点的坐标从1开始,依次递增1;34行减1是因为数组下标是从0开始)
 #输出：点的坐标.csv
 #三处需要更改：1,2,3
@@ -30,8 +32,19 @@ for i in xIter:
 
 data = np.zeros((len(xIter), len(xIter)))
 
+print(len(xIter))
+for i in range(0,len(xIter)):
+    for j in range(0,len(xIter)):
+        if i==j:
+            data[i][j]=0
+        else:
+            data[i][j]=MAXNUM
+        
 for i in range(0,len(y)-1):
     data[int(x[i])-1][int(y[i])-1]=1
+
+#测试一下data数组    
+print(data[0][298])
 
 mds = MDS(dissimilarity='precomputed')
 
