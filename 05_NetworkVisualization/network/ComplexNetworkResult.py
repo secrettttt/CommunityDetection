@@ -100,7 +100,7 @@ v=[]
 flag=0
 #node0的位置是(0,0),原图没有。当flag=0时，k=row,v=value;当flag=1时，k=0,原图没有这个点。
 for i in dat:
-    if flag>1:
+    if flag>0:
         k.append(i[0])
         v.append(i[1])
     flag += 1
@@ -147,7 +147,7 @@ v=[]
 flag=0
 #node0的位置是(0,0),原图没有。当flag=0时，k=row,v=value;当flag=1时，k=0,原图没有这个点。
 for i in dat:
-    if flag>1:
+    if flag>0:
         k.append(i[0])
         v.append(i[1])
     flag += 1
