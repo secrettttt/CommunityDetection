@@ -84,6 +84,47 @@ plt.rcParams['figure.dpi'] = 1000 #分辨率
 plt.savefig("networkResult_IsoFdp.png")
 plt.show()
 
+#读取文件：正确的社区划分（trueResult文件）
+f=open('community_mix1.dat','r')
+#处理读出的数据
+k=[]
+v=[]
+for i in range(1000):
+    data = f.readline();
+    p = (data.split())
+    '''
+    k.append(int(p[0]))
+    v.append(int(p[1]))
+    如果是这两句，那就无法生成图片，抛出异常：NetworkXError: Node 1 has no position.
+    '''
+    k.append(str(p[0]))
+    v.append(str(p[1]))
+    
+#生成字典：节点：类别
+partition = dict(zip(k,v))
+        
+#数据可视化：输出划分后网络图
+count = 0
+for com in set(partition.values()) :
+    count += 1
+    list_nodes = [nodes for nodes in partition.keys()
+                                if partition[nodes] == com]               
+    nx.draw_networkx_nodes(G, pos, list_nodes, node_size = 1,\
+                                node_color = cl[count%30],\
+                                with_labels=True, font_weight='bold'\
+                                ,font_size=1)
+nx.draw_networkx_edges(G,pos,with_labels = True,width=0.1)
+
+#去掉坐标轴和刻度：不知道为什么会自动生成？
+plt.xticks([])
+plt.yticks([])
+plt.axis('off')
+
+plt.rcParams['savefig.dpi'] = 1000 #图片像素
+plt.rcParams['figure.dpi'] = 1000 #分辨率
+plt.savefig("networkResult_true.png")
+plt.show()
+
 
 #读取Clust_Kmeans文件
 csv_file=open('Clust_Kmeans.csv')    #打开csv文件
