@@ -6,11 +6,10 @@ Created on Sun Apr 21 21:09:41 2019
 """
 
 # coding=utf-8
+import csv
 import numpy as np
 from scipy.io import loadmat
-import csv
-from sklearn.metrics import accuracy_score
-
+from sklearn import metrics
 
 if __name__ == '__main__':
    
@@ -37,7 +36,7 @@ if __name__ == '__main__':
     
     
     '''
-    获得IsoFdp聚类结果的的acc值
+    获得IsoFdp聚类结果的的ARI值
     '''
     #读取Clust文件
     f_Clust = loadmat("Clust.mat")
@@ -49,11 +48,11 @@ if __name__ == '__main__':
      
     A = np.array(IFR)
     B = np.array(tR)
-    IsoFdpacc = accuracy_score(IFR, tR)
-    print('IsoFdpacc:',IsoFdpacc)
+    IsoFdpARI = metrics.adjusted_rand_score(tR,IFR)
+    print('IsoFdpARI:',IsoFdpARI)
     
     '''
-    获得Kmeans聚类结果的的acc值
+    获得Kmeans聚类结果的的ARI值
     '''
     #读取Clust_Kmeans文件
     csv_file=open('Clust_Kmeans.csv')
@@ -74,12 +73,12 @@ if __name__ == '__main__':
         
     A = np.array(KR)
     B = np.array(tR)
-    Kmeansacc = accuracy_score(KR, tR)
-    print('Kmeansacc:',Kmeansacc)
+    KmeansARI = metrics.adjusted_rand_score(tR,KR)
+    print('KmeansARI:',KmeansARI)
 
     
     '''
-    获得DBSCAN聚类结果的的acc值
+    获得DBSCAN聚类结果的的ARI值
     '''
     #读取Clust_DBSCAN文件
     csv_file=open('Clust_DBSCAN.csv')
@@ -100,8 +99,8 @@ if __name__ == '__main__':
         
     A = np.array(DBSR)
     B = np.array(tR)
-    DBSCANacc = accuracy_score(DBSR, tR)
-    print('DBSCANacc:',DBSCANacc)
+    DBSCANARI = metrics.adjusted_rand_score(tR,DBSR)
+    print('DBSCANARI:',DBSCANARI)
     
     '''
     结果可视化并以文件形式输出
@@ -115,23 +114,23 @@ if __name__ == '__main__':
     # 柱子总数
     N = 3
     # 包含每个柱子对应值的序列
-    values = (Kmeansacc,DBSCANacc,IsoFdpacc)
+    values = (KmeansARI,DBSCANARI,IsoFdpARI)
     # 包含每个柱子下标的序列
     index = np.arange(N)
     # 柱子的宽度
     width = 0.35
     # 绘制柱状图, 每根柱子的颜色为绿色
-    p2 = plt.bar(index, values, width, label="acc", color="green")
+    p2 = plt.bar(index, values, width, label="ARI", color="green")
     # 设置横轴标签
     plt.xlabel('Algorithm')
     # 设置纵轴标签
-    plt.ylabel('acc')
+    plt.ylabel('ARI')
     # 添加标题
-    plt.title('Assessment-acc')
+    plt.title('Assessment-ARI')
     # 添加纵横轴的刻度
     plt.xticks(index, ('Kmeans', 'DBSCAN', 'IsoFdp'))
     plt.yticks(np.arange(0, 1.2, 0.2))
     # 添加图例
     plt.legend(loc="upper right")
-    plt.savefig("Assesement-acc.png")
+    plt.savefig("Assesement-ARI.png")
     plt.show()
