@@ -15,7 +15,7 @@ import KMeans
 print ("step 1: load data..." ) 
 dataSet = []   #列表，用来表示，列表中的每个元素也是一个二维的列表；这个二维列表就是一个样本，样本中包含有我们的属性值和类别号。
 #与我们所熟悉的矩阵类似，最终我们将获得N*2的矩阵，每行元素构成了我们的训练样本的属性值和类别号
-fileIn = open("network_mix1_point.csv")  #是正斜杠
+fileIn = open("network_point.csv")  #是正斜杠
 for line in fileIn.readlines(): 
 	temp=[]
 	lineArr = line.strip().split(',')  #line.strip()把末尾的'\n'去掉

@@ -15,7 +15,7 @@ def load_data():
     :return: 数据
     """
     points = [] 
-    fileIn = open("network_mix1_point.csv")  #是正斜杠
+    fileIn = open("network_point.csv")  #是正斜杠
     for line in fileIn.readlines(): 
         temp=[]
         lineArr = line.strip().split(',')  #line.strip()把末尾的'\n'去掉
@@ -143,7 +143,7 @@ if __name__ == '__main__':
         markIndex = cluster_DBSCAN[i]
         b.append(markIndex)
     a = []
-    for i in range(1000):
+    for i in range(len(cluster_DBSCAN)):
         a.append(i+1)
  
     #字典中的key值即为csv中列名

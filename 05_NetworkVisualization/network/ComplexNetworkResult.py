@@ -10,33 +10,39 @@ import matplotlib.pyplot as plt
 from scipy.io import loadmat
 
 #读取network文件
-f = open('network_mix1.dat','r')
+f = open('network.dat','r')
+f_count = len(open('network.dat', 'r').readlines())
+
 
 #临时变量
 temp = 0
+nodeNumber=[]
 
 #创建并初始化一个网络
 G = nx.Graph()
 while 1:
     data = f.readline();
     p = (data.split())
+    nodeNumber.append(p[0]);
     G.add_edge(p[0],p[1]);
     temp += 1
-    if temp == 19608:
+    if temp == f_count:
         break
 else:
     print('error')
 
 #读取Clust文件
 f_Clust = loadmat("Clust.mat")
+nodeNumberSet=set(nodeNumber)
+f_count = len(nodeNumberSet)
 
 #处理读出的数据
 value=f_Clust['Clust']
 k=[]
 v=[]
-for i in range(1,1001):
+for i in range(1,f_count+1):
     k.append(str(i))
-for i in range(0,1000):
+for i in range(0,f_count):
      v.append(str(value[0][i]))
 
 #生成字典：节点：类别
@@ -62,12 +68,14 @@ plt.rcParams['figure.dpi'] = 1000 #分辨率
 plt.savefig("network.png")
 plt.show()
 
+
+
 #数据可视化：输出划分后网络图
 count = 0
 for com in set(partition.values()) :
     count += 1
     list_nodes = [nodes for nodes in partition.keys()
-                                if partition[nodes] == com]                
+                                if partition[nodes] == com]              
     nx.draw_networkx_nodes(G, pos, list_nodes, node_size = 1,\
                                 node_color = cl[count%30],\
                                 with_labels=True, font_weight='bold'\
@@ -85,11 +93,12 @@ plt.savefig("networkResult_IsoFdp.png")
 plt.show()
 
 #读取文件：正确的社区划分（trueResult文件）
-f=open('community_mix1.dat','r')
+f=open('community.dat','r')
+f_count = len(open('community.dat', 'r').readlines())
 #处理读出的数据
 k=[]
 v=[]
-for i in range(1000):
+for i in range(f_count):
     data = f.readline();
     p = (data.split())
     '''

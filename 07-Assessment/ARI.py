@@ -28,7 +28,7 @@ if __name__ == '__main__':
             os.rename(filename,newname)
     
     #读取txt文件
-    trueResult = np.loadtxt('community_mix1.txt')
+    trueResult = np.loadtxt('community.txt')
     print(trueResult)
     tR=[]
     for i in range(len(trueResult)):

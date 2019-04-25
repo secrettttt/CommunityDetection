@@ -26,7 +26,7 @@ for i in range(0,len(data)):
 newData = np.c_[name,newData]  
 
 
-csvFile = open('network_mix1_point.csv','w', newline='')#设置newline，否则两行之间会空一行
+csvFile = open('network_point.csv','w', newline='')#设置newline，否则两行之间会空一行
 writer = csv.writer(csvFile)
 for i in range(0,len(data)):
     writer.writerow(newData[i])
