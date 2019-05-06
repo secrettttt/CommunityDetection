@@ -1,4 +1,0 @@
-load community2.txt
-save community2
-load community2_groundtruth.txt
-save community2_groundtruth
